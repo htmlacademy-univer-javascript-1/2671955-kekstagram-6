@@ -1,5 +1,5 @@
-import {createRandomNumber, createUniqueNumber} from './number-generators';
-import {MESSAGES, USERNAMES} from './constants';
+import {createRandomNumber, createUniqueNumber} from './number-generators.js';
+import {MESSAGES, USERNAMES} from './constants.js';
 
 
 const createMessage = function(numberOfMessages) {
