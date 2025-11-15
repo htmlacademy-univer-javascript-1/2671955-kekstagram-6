@@ -1,3 +1,3 @@
-import {photo} from './photo-constructor.js';
+import {renderPicture} from './picture-render.js';
 
-console.log(photo);
+renderPicture();

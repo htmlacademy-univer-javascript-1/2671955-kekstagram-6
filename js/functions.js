@@ -16,3 +16,5 @@ function checkPalindromes(str) {
 
 console.log(checkPalindromes('шалаш'));
 console.log(checkPalindromes('яблоко'));
+
+
