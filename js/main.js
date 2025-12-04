@@ -1,3 +1,5 @@
-import {renderPicture} from './picture-render.js';
+import {renderMiniatures, picturesContainer} from './render-miniatures.js';
+import {renderFullPicture} from './render-full.js';
 
-renderPicture();
+renderMiniatures();
+renderFullPicture(picturesContainer);
