@@ -1,4 +1,4 @@
-const onCloseModal = function () {
+const closePicture = function () {
   const body = document.querySelector('body');
   const bigPictureElement = document.querySelector('.big-picture');
   const loadMoreButtonElement = bigPictureElement.querySelector('.social__comments-loader');
@@ -8,4 +8,4 @@ const onCloseModal = function () {
   loadMoreButtonElement.classList.remove('hidden');
 };
 
-export {onCloseModal};
+export {closePicture};
