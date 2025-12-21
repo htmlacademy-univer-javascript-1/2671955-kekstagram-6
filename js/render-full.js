@@ -1,6 +1,6 @@
 import {photo} from './photo-constructor.js';
 import {renderComments} from './render-comments.js';
-import {onCloseModal} from './close-modal.js';
+import {closePicture} from './close-bigpicture.js';
 
 const renderFullPicture = function(photos) {
   const body = document.querySelector('body');
@@ -41,16 +41,17 @@ const renderFullPicture = function(photos) {
   cancelButtonElement.addEventListener('click', () => {
     socialCommentsElement.innerHTML = '';
     socialCommentsElement.appendChild(commentTemplate);
-    onCloseModal();
-  })
-  );
+    closePicture();
+  }),
+
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       socialCommentsElement.innerHTML = '';
       socialCommentsElement.appendChild(commentTemplate);
-      onCloseModal();
+      closePicture();
     }
-  });
+  })
+  );
 };
 
 
