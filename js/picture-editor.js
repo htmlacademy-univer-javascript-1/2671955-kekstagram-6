@@ -1,4 +1,6 @@
 import {closeEditor} from './close-editor.js';
+import {imageScaleController} from './scale-controller.js';
+import {slider} from './slider.js';
 
 const formController = function () {
   const body = document.querySelector('body');
@@ -50,6 +52,8 @@ const formController = function () {
   imageUploadElement.addEventListener('change', () => {
     imageUploadOverlayElement.classList.remove('hidden');
     body.classList.add('modal-open');
+    imageScaleController();
+    slider();
   }
   );
 
@@ -72,6 +76,7 @@ const formController = function () {
 
   hashtagFieldElement.addEventListener('keydown', dontCloseOnFocus);
   commentFieldElement.addEventListener('keydown', dontCloseOnFocus);
+
 
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
