@@ -1,15 +1,18 @@
 import {closeEditor} from './close-editor.js';
 import {imageScaleController} from './scale-controller.js';
 import {slider} from './slider.js';
+import {sendData} from './api.js';
 
 const formController = function () {
   const body = document.querySelector('body');
   const form = document.querySelector('.img-upload');
   const imageUploadElement = document.querySelector('.img-upload__input');
   const imageUploadOverlayElement = document.querySelector('.img-upload__overlay');
+  const imagePreviewElement = imageUploadOverlayElement.querySelector('.img-upload__preview img');
   const imageUploadCancelElement = document.querySelector('.img-upload__cancel');
   const submitButton = form.querySelector('.img-upload__submit');
   const commentFieldElement = form.querySelector('.text__description');
+  const effectsListElement = form.querySelectorAll('.effects__item');
 
 
   const validator = new Pristine(form, {
@@ -49,20 +52,31 @@ const formController = function () {
   );
 
 
-  imageUploadElement.addEventListener('change', () => {
+  imageUploadElement.addEventListener('change', (evt) => {
     imageUploadOverlayElement.classList.remove('hidden');
     body.classList.add('modal-open');
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      imagePreviewElement.src = reader.result;
+      effectsListElement.forEach((effect) => {
+        effect.querySelector('.effects__preview').style.backgroundImage = `url(${reader.result})`;
+      });
+    });
+    reader.readAsDataURL(evt.target.files[0]);
+
     imageScaleController();
     slider();
   }
   );
 
   imageUploadCancelElement.addEventListener('click', closeEditor);
-  document.addEventListener('keydown', (evt) => {
+
+  const closeOnEsc = function(evt) {
     if (evt.key === 'Escape') {
       closeEditor();
     }
-  });
+  };
+  document.addEventListener('keydown', closeOnEsc);
 
   form.addEventListener('input', ()=> {
     submitButton.disabled = !validator.validate();
@@ -80,13 +94,11 @@ const formController = function () {
 
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const commentValid = validator.validate();
 
-    if (commentValid) {
-      console.log('Можно отправлять');
-    } else {
-      console.log('Форма невалидна');
-    }
+    const formData = new FormData(evt.target);
+
+    sendData(formData);
+    document.removeEventListener('keydown', closeOnEsc);
   });
 };
 

@@ -8,6 +8,7 @@ const closeEditor = function () {
   const scaleSmallerButtonElement = imageUploadOverlayElement.querySelector('.scale__control--smaller');
   const sliderElement = document.querySelector('.effect-level__slider');
   const imagePreviewElement = document.querySelector('.img-upload__preview');
+  const effectsListElement = document.querySelectorAll('.effects__item');
 
   imageUploadOverlayElement.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -21,6 +22,12 @@ const closeEditor = function () {
 
   sliderElement.noUiSlider.destroy();
   imagePreviewElement.style.filter = '';
+  imagePreviewElement.querySelector('img').src = '';
+  imagePreviewElement.style.transform = 'scale(1)';
+
+  effectsListElement.forEach((effect) => {
+    effect.querySelector('.effects__preview').style.backgroundImage = '';
+  });
 };
 
 export {closeEditor};
