@@ -1,8 +1,7 @@
-import {photo} from './photo-constructor.js';
 import {renderComments} from './render-comments.js';
 import {closePicture} from './close-bigpicture.js';
 
-const renderFullPicture = function(photos) {
+const renderFullPicture = function(photos, data) {
   const body = document.querySelector('body');
 
   const allPicturesElement = photos.querySelectorAll('.picture');
@@ -22,16 +21,16 @@ const renderFullPicture = function(photos) {
     picture.addEventListener('click', () => {
       bigPictureElement.classList.remove('hidden');
       body.classList.add('modal-open');
-      bigPictureImgElement.src = photo[picture.id].url;
-      bigPictureImgElement.alt = photo[picture.id].description;
-      socialLikesCount.textContent = photo[picture.id].likes;
-      socialCommentsCount.textContent = photo[picture.id].comments.length;
+      bigPictureImgElement.src = data[picture.id].url;
+      bigPictureImgElement.alt = data[picture.id].description;
+      socialLikesCount.textContent = data[picture.id].likes;
+      socialCommentsCount.textContent = data[picture.id].comments.length;
 
 
-      const commentsRender = renderComments(picture, bigPictureSocialElement);
+      const commentsRender = renderComments(picture, bigPictureSocialElement, data);
       loadMoreButtonElement.addEventListener('click', commentsRender);
 
-      if (photo[picture.id].comments.length <= 5) {
+      if (data[picture.id].comments.length <= 5) {
         loadMoreButtonElement.classList.add('hidden');
       } else {
         loadMoreButtonElement.classList.remove('hidden');

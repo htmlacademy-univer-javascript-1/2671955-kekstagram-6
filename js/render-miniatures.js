@@ -1,25 +1,23 @@
-import {photo} from './photo-constructor.js';
-
 const picturesContainer = document.querySelector('.pictures');
 
-const renderMiniatures = function () {
+const renderMiniatures = function (data) {
 
   const template = document.querySelector('#picture').content;
 
-  for (let i = 0; i < photo.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     const newPhoto = template.cloneNode(true);
     const templateElement = newPhoto.querySelector('.picture');
     templateElement.setAttribute('id', i);
 
     const pictureImgElement = newPhoto.querySelector('.picture__img');
-    pictureImgElement.src = photo[i].url;
-    pictureImgElement.alt = photo[i].description;
+    pictureImgElement.src = data[i].url;
+    pictureImgElement.alt = data[i].description;
 
     const pictureLikesElement = newPhoto.querySelector('.picture__likes');
-    pictureLikesElement.textContent = photo[i].likes;
+    pictureLikesElement.textContent = data[i].likes;
 
     const pictureCommentsElement = newPhoto.querySelector('.picture__comments');
-    pictureCommentsElement.textContent = photo[i].comments.length;
+    pictureCommentsElement.textContent = data[i].comments.length;
 
     const fragment = document.createDocumentFragment();
     fragment.appendChild(newPhoto);

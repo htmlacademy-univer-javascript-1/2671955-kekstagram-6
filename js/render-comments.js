@@ -1,6 +1,4 @@
-import {photo} from './photo-constructor.js';
-
-const renderComments = function(picture, social) {
+const renderComments = function(picture, social, data) {
   const bigPictureElement = document.querySelector('.big-picture');
   const socialCommentsElement = social.querySelector('.social__comments');
   const commentTemplate = socialCommentsElement.querySelector('.social__comment');
@@ -8,8 +6,8 @@ const renderComments = function(picture, social) {
   socialCommentsElement.innerHTML = '';
 
   const socialCaptionElement = social.querySelector('.social__caption');
-  socialCaptionElement.textContent = photo[picture.id].description;
-  const commentsArray = photo[picture.id].comments;
+  socialCaptionElement.textContent = data[picture.id].description;
+  const commentsArray = data[picture.id].comments;
 
 
   let CURRENT_COMMENT = 0;
