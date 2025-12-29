@@ -97,6 +97,7 @@ const formController = function () {
 
     const formData = new FormData(evt.target);
 
+    submitButton.disabled = true;
     sendData(formData);
     document.removeEventListener('keydown', closeOnEsc);
   });
